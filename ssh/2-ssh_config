@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# ssh cinfig file
+
+Host *
+      IdentifyFile ~/.ssh/school
+      PasswordAuthentication no    
