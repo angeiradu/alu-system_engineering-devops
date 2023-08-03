@@ -11,7 +11,7 @@ server {
 
     server_name _;
 
-    add_header X-Served-By $server_hostname;
+    add_header X-Served-By "$server_hostname";
 
     location / {
         # Your existing configuration for handling requests goes here
