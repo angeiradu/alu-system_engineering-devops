@@ -1,15 +1,9 @@
 #!/usr/bin/env bash
+# onfigure web-02 to be identical to web-01.
 
-# Update system packages
 sudo apt update
-
-# Install Nginx
 sudo apt install -y nginx
-
-# Get the hostname of the server
 server_hostname=$(hostname)
-
-# Configure Nginx to add the custom HTTP response header
 cat <<EOL | sudo tee /etc/nginx/sites-available/default
 server {
     listen 80 default_server;
@@ -28,11 +22,8 @@ server {
 }
 EOL
 
-# Enable the Nginx site configuration
 sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
 
-# Test Nginx configuration
 sudo nginx -t
 
-# Reload Nginx to apply changes
 sudo systemctl reload nginx
