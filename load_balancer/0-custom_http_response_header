@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# onfigure web-02 to be identical to web-01.
+# configure web-02 to be identical to web-01.
 
 sudo apt update
 sudo apt install -y nginx
