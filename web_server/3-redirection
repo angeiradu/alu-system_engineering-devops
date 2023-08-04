@@ -1,16 +1,1 @@
-#!/usr/bin/env bash
-#Configure a new Nginx server so that /redirect_me is redirecting to another page
-
-echo 'server {
-    listen 80;
-    server_name your_domain.com; # Replace with your domain name
-
-    location /redirect_me {
-        return 301 https://new_page.com$request_uri;
-    }
-}' | sudo tee /etc/nginx/sites-available/redirect > /dev/null
-
-sudo ln -s /etc/nginx/sites-available/redirect /etc/nginx/sites-enabled/
-sudo nginx -t
-sudo systemctl restart nginx
 
