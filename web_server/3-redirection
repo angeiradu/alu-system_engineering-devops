@@ -1,7 +1,26 @@
 #!/usr/bin/env bash
-# Configure nginx server redirecting to another page
+#Configure your Nginx server so that /redirect_me is redirecting to another page
+
 sudo apt-get update
-sudo apt-get -y install nginx
-newlines="\\\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;"
-sudo sed -i "53i $newlines" /etc/nginx/sites-available/default
+sudo apt-get install nginx -y
+sudo ufw allow 'Nginx HTTP'
+config=\
+"server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+	root /var/www/html;
+	index index.html index.htm index.nginx-debian.html;
+	server_name _;
+	location / {
+		try_files \$uri \$uri/ =404;
+        }
+	location /redirect_me {
+		return 301 /watch?v=QH2-TGUlwu4;
+	}
+}
+"
+sudo chown -R "$USER":"$USER" /var/www/html/index.html
+sudo chown -R "$USER":"$USER" /etc/nginx/sites-available/default
+echo "Holberton School" | sudo tee /var/www/html/index.html
+echo "$config" | sudo tee /etc/nginx/sites-available/default
 sudo service nginx restart
