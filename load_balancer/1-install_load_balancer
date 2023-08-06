@@ -3,12 +3,10 @@
 sudo apt update -y
 sudo apt install haproxy -y
 echo 'ENABLED=1' | sudo tee -a /etc/default/haproxy
-printf %s 
-frontend haproxy_balancer
+printf %s 'frontend haproxy_balancer
     bind *:80
     mode http
     default_backend webservers
-    
 backend webservers
     balance roundrobin
     server 5668-web-01 52.91.38.203:80  check
